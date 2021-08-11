@@ -66,7 +66,8 @@ public class Form extends JFrame {
 
 
 
-        String mypathL = "/home/user/java/project/ScrollingPhotos/res/left";
+        //String mypathL = "/home/user/java/project/ScrollingPhotos/res/left"; //linux
+        String mypathL = "D:\\Java\\!Project\\ScrollingPhotos\\res\\left"; //windows
 
 
         lphoto = ReadPhotosLeft();
@@ -75,8 +76,10 @@ public class Form extends JFrame {
         for(int i = 0; i < lphoto.length; i++){
             for (int j = 1; j < lphoto[i].length; j++){
                 labelLP.setText(lphoto[i][0]);
-                mypathtl = mypathL + "/" + lphoto[i][0];
-                icon = new ImageIcon(mypathtl + "/" + lphoto[i][j]);
+                //mypathtl = mypathL + "/" + lphoto[i][0]; //linux
+                mypathtl = mypathL + "\\" + lphoto[i][0]; //windows
+                //icon = new ImageIcon(mypathtl + "/" + lphoto[i][j]); //linux
+                icon = new ImageIcon(mypathtl + "\\" + lphoto[i][j]); //windows
 
                 int nw = icon.getIconWidth();
                 int nh = icon.getIconHeight();
@@ -106,7 +109,7 @@ public class Form extends JFrame {
 
                 form.setVisible(true);
 
-                TimeUnit.SECONDS.sleep(5);
+                TimeUnit.SECONDS.sleep(2);
             }
         }
 
@@ -115,7 +118,8 @@ public class Form extends JFrame {
 
     public String[][] ReadPhotosLeft(){
 
-        String mypath = "/home/user/java/project/ScrollingPhotos/res/left";
+        //String mypath = "/home/user/java/project/ScrollingPhotos/res/left"; //linux
+        String mypath = "D:\\Java\\!Project\\ScrollingPhotos\\res\\left"; //windows
         String mypathtemp;
         mypathl = new File(mypath);
 
@@ -126,7 +130,8 @@ public class Form extends JFrame {
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isDirectory()) {
                 System.out.println("papka " + listOfFiles[i].getName());
-                mypathtemp = mypath + "/" + listOfFiles[i].getName();
+                //mypathtemp = mypath + "/" + listOfFiles[i].getName(); //linux
+                mypathtemp = mypath + "\\" + listOfFiles[i].getName(); //windows
                 System.out.println(mypathtemp);
                 mypathlt = new File(mypathtemp);
                 File[] listOfFiles1 = mypathlt.listFiles();
@@ -159,7 +164,7 @@ public class Form extends JFrame {
 
     public String[][] ReadPhotosRight(){
 
-        mypathr = new File("/home/user/java/project/ScrollingPhotos/res/right");
+        //mypathr = new File("/home/user/java/project/ScrollingPhotos/res/right");
 
 
         return null;
