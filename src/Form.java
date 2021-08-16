@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Form extends JFrame {
@@ -9,7 +10,7 @@ public class Form extends JFrame {
     private JPanel leftP, rightP;
     private JLabel labelLP, labelRP, picL, picR;
     private int xform, yform, widthform, heightform, xleftp, yleftp, widthleftp, heightleftp, xrightp, yrightp, widthrightp, heightrightp;
-    private String[][] leftphoto, rightphoto, lphoto;
+    private String[][] leftphoto, rightphoto, lphoto, lphoto1;
     private ImageIcon icon;
     private File mypathl, mypathr, mypathlt;
 
@@ -71,45 +72,48 @@ public class Form extends JFrame {
         lphoto = ReadPhotosLeft();
         String mypathtl;
 
-        for(int i = 0; i < lphoto.length; i++){
-            for (int j = 1; j < lphoto[i].length; j++){
-                labelLP.setText(lphoto[i][0]);
-                mypathtl = mypathL + "/" + lphoto[i][0];
-                icon = new ImageIcon(mypathtl + "/" + lphoto[i][j]);
+        Random random = new Random();
+        int count = 0;
+        while (count != 9) {
+            System.out.println(lphoto.length);
+            int i = random.nextInt(lphoto.length);
+            System.out.println(i);
+            labelLP.setText(lphoto[i][0]);
+            mypathtl = mypathL + "/" + lphoto[i][0];
+            System.out.println(lphoto[i].length);
+            int j = 0;
+            while (j == 0) j = random.nextInt(lphoto[i].length);
+            System.out.println(j);
+            icon = new ImageIcon(mypathtl + "/" + lphoto[i][j]);
 
-                int nw = icon.getIconWidth();
-                int nh = icon.getIconHeight();
+            int nw = icon.getIconWidth();
+            int nh = icon.getIconHeight();
 
-                if(icon.getIconWidth() > picL.getWidth())
-                {
-                    nw = picL.getWidth();
-                    nh = (nw * icon.getIconHeight()) / icon.getIconWidth();
-                }
-
-                if(nh > picL.getHeight())
-                {
-                    nh = picL.getHeight();
-                    nw = (icon.getIconWidth() * nh) / icon.getIconHeight();
-                }
-
-                ImageIcon newImc = new ImageIcon(icon.getImage().getScaledInstance(nw, nh, Image.SCALE_DEFAULT));
-                picL.setIcon(newImc);
-                picL.setHorizontalAlignment(0);
-
-
-                leftP.add(picL);
-                picL.add(labelLP);
-                rightP.add(labelRP);
-                form.getContentPane().add(leftP);
-                form.getContentPane().add(rightP);
-
-                form.setVisible(true);
-
-                TimeUnit.SECONDS.sleep(2);
+            if (icon.getIconWidth() > picL.getWidth()) {
+                nw = picL.getWidth();
+                nh = (nw * icon.getIconHeight()) / icon.getIconWidth();
             }
+
+            if (nh > picL.getHeight()) {
+                nh = picL.getHeight();
+                nw = (icon.getIconWidth() * nh) / icon.getIconHeight();
+            }
+
+            ImageIcon newImc = new ImageIcon(icon.getImage().getScaledInstance(nw, nh, Image.SCALE_DEFAULT));
+            picL.setIcon(newImc);
+            picL.setHorizontalAlignment(0);
+
+            leftP.add(picL);
+            picL.add(labelLP);
+            rightP.add(labelRP);
+            form.getContentPane().add(leftP);
+            form.getContentPane().add(rightP);
+            form.setVisible(true);
+
+            TimeUnit.SECONDS.sleep(2);
+            count++;
+
         }
-
-
     }
 
     public String[][] ReadPhotosLeft(){
